@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Add New Todo{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h2>Add New Todo</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="sub_title" class="form-label">Sub Title</label>
+            <input type="text" class="form-control" id="sub_title" name="sub_title" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="priority" class="form-label">Priority</label>
+            <select class="form-select" id="priority" name="priority">
+                <option value="None">None</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="deadline" class="form-label">Deadline</label>
+            <input type="date" class="form-control" id="deadline" name="deadline">
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control" id="image" name="image">
+        </div>
+
+        <div class="mb-3">
+            <label for="video" class="form-label">Video</label>
+            <input type="file" class="form-control" id="video" name="video">
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="is_done" name="is_done">
+            <label class="form-check-label" for="is_done">Is Done?</label>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="is_active" name="is_active" checked>
+            <label class="form-check-label" for="is_active">Is Active?</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Todo</button>
+    </form>
+</div>
+
+{% endblock %}

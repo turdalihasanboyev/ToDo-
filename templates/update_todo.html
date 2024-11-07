@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Edit ToDo - {{ todo.title }}{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <h1>Edit ToDo: {{ todo.title }}</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ todo.title }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="sub_title" class="form-label">Sub Title</label>
+            <input type="text" class="form-control" id="sub_title" name="sub_title" value="{{ todo.sub_title }}"
+                required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description">{{ todo.description }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="priority" class="form-label">Priority</label>
+            <select class="form-select" id="priority" name="priority">
+                <option value="None" {% if todo.priority=="None" %}selected{% endif %}>None</option>
+                <option value="Low" {% if todo.priority=="Low" %}selected{% endif %}>Low</option>
+                <option value="Medium" {% if todo.priority=="Medium" %}selected{% endif %}>Medium</option>
+                <option value="High" {% if todo.priority=="High" %}selected{% endif %}>High</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="deadline" class="form-label">Deadline</label>
+            <input type="date" class="form-control" id="deadline" name="deadline"
+                value="{{ todo.deadline|date:'Y-m-d' }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control" id="image" name="image">
+            {% if todo.image %}
+            <img src="{{ todo.image.url }}" alt="Image" class="img-thumbnail mt-2" width="100">
+            {% endif %}
+        </div>
+
+        <div class="mb-3">
+            <label for="video" class="form-label">Video</label>
+            <input type="file" class="form-control" id="video" name="video">
+            {% if todo.video %}
+            <a href="{{ todo.video.url }}" target="_blank" class="btn btn-sm btn-info mt-2">View Video</a>
+            {% endif %}
+        </div>
+
+        <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="is_done" name="is_done" {% if todo.is_done %}checked{%
+                endif %}>
+            <label class="form-check-label" for="is_done">Mark as Done</label>
+        </div>
+
+        <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="is_active" name="is_active" {% if todo.is_active
+                %}checked{% endif %}>
+            <label class="form-check-label" for="is_active">Active</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+
+    <a href="{{ todo.get_absolute_url }}" class="btn btn-secondary mt-3">Cancel</a>
+</div>
+
+{% endblock %}

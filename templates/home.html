@@ -6,4 +6,96 @@
 
 {% block content %}
 
+<div class="container mt-5">
+    <h1 class="text-center mb-4">ToDo List</h1>
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Subtitle</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Deadline</th>
+                <th>Status</th>
+                <th>Active</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+                <th>View Action</th>
+                <th>Is_Active Action</th>
+                <th>Is_Done Action</th>
+                <th>Delete ToDo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for todo in todos %}
+            <tr>
+                <td>{{ todo.id }}</td>
+                {% if todo.title %}
+                <td>{{ todo.title }}</td>
+                {% else %}
+                <td>Not Available</td>
+                {% endif %}
+                {% if todo.sub_title %}
+                <td>{{ todo.sub_title }}</td>
+                {% else %}
+                <td>Not Available</td>
+                {% endif %}
+                {% if todo.description %}
+                <td>{{ todo.description }}</td>
+                {% else %}
+                <td>Not Available</td>
+                {% endif %}
+                {% if todo.priority %}
+                <td>{{ todo.priority|capfirst }}</td>
+                {% else %}
+                <td>Not Available</td>
+                {% endif %}
+                {% if todo.deadline %}
+                <td>{{ todo.deadline }}</td>
+                {% else %}
+                <td>Not Available</td>
+                {% endif %}
+                <td>
+                    {% if todo.is_done %}
+                    <span class="badge bg-success">Done</span>
+                    {% else %}
+                    <span class="badge bg-warning">Pending</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if todo.is_active %}
+                    <span class="badge bg-primary">Active</span>
+                    {% else %}
+                    <span class="badge bg-secondary">Inactive</span>
+                    {% endif %}
+                </td>
+                {% if todo.created_at %}
+                <td>{{ todo.created_at|date:"Y-m-d H:i" }}</td>
+                {% else %}
+                <td>Not Available</td>
+                {% endif %}
+                {% if todo.updated_at %}
+                <td>{{ todo.updated_at|date:"Y-m-d H:i" }}</td>
+                {% else %}
+                <td>Not Available</td>
+                {% endif %}
+                <td>
+                    <a href="{{ todo.get_absolute_url }}" class="btn btn-sm btn-info">View</a>
+                </td>
+                <td>
+                    <a href="/is-active/{{ todo.pk }}" class="btn btn-sm btn-warning">Is_Active</a>
+                </td>
+                <td>
+                    <a href="/is-done/{{ todo.pk }}" class="btn btn-sm btn-secondary">Is_Done</a>
+                </td>
+                <td>
+                    <a href="/todo-delete/{{ todo.slug }}" class="btn btn-sm btn-danger">Delete ToDo</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 {% endblock %}
