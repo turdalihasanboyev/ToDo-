@@ -55,6 +55,21 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'add-todo' %}">Add New ToDo</a>
                     </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'register' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a>
+                    </li>
+                    {% endif %}
                 </ul>
                 <form class="d-flex" method="post">
                     {% csrf_token %}

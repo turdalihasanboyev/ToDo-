@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home_page_view, todo_detail_view, is_done_view, is_active_view, update_todo_view, add_new_todo_view, delete_todo_view
+from .views import home_page_view, todo_detail_view, is_done_view, is_active_view, update_todo_view, add_new_todo_view, delete_todo_view, profile_view, register_view, login_view, logout_view
 
 
 urlpatterns = [
@@ -10,4 +10,8 @@ urlpatterns = [
     path('todo-update/<slug:slug>/', update_todo_view, name='todo-update'),
     path('add-todo/', add_new_todo_view, name='add-todo'),
     path('todo-delete/<slug:slug>/', delete_todo_view, name='delete-todo'),
+    path('profile/', profile_view, name='profile'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+    path('register/', register_view, name='register'),
 ]

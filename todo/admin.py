@@ -62,6 +62,7 @@ class CustomUserAdmin(UserAdmin):
 class ToDoAdmin(admin.ModelAdmin):
     model = ToDo
     ordering = ('-id',)
+    prepopulated_fields = {'slug': ('title',),}
     list_display = (
         'id',
         'title',
@@ -75,7 +76,6 @@ class ToDoAdmin(admin.ModelAdmin):
         'created_at',
         'updated_at',
     )
-    prepopulated_fields = {'slug': ('title',),}
     readonly_fields = (
         'id',
         'created_at',
