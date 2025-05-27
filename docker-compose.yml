@@ -1,0 +1,19 @@
+services:
+  web:
+    build: .
+    image: todo_web_image
+    container_name: todo_web_container
+    ports:
+      - "6565:6565"
+    restart: unless-stopped
+    environment:
+      - DEBUG=False
+      - DJANGO_ALLOWED_HOSTS=*
+      - DJANGO_SUPERUSER_EMAIL=turdalihasanboyev144@gmail.com
+      - DJANGO_SUPERUSER_PASSWORD=123
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             python manage.py createsuperuser --noinput || true &&
+             python manage.py runserver 0.0.0.0:6565"
