@@ -55,7 +55,7 @@ class ToDo(models.Model):
     sub_title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(blank=True)
     description = models.TextField(null=True, blank=True)
-    priority = models.CharField(max_length=50, choices=PRIORITY, default=('None', ('None')))
+    priority = models.CharField(max_length=50, choices=PRIORITY, default='None')
     deadline = models.DateField(null=True, blank=True)
     image = models.ImageField(upload_to='todo_images', default='img/default-image.jpg')
     video = models.FileField(upload_to='todo_videos')

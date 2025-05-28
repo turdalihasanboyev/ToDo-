@@ -8,11 +8,18 @@
 
 <div class="container mt-5">
     <h1>{{ todo.title }}</h1>
+
     <p><strong>Sub Title:</strong> {{ todo.sub_title }}</p>
 
     <p><strong>Description:</strong> {{ todo.description }}</p>
 
-    <p><strong>Priority:</strong> {{ todo.get_priority_display }}</p>
+    <p><strong>Priority:</strong>
+        {% if todo.priority and todo.priority != 'None' %}
+        {{ todo.get_priority_display }}
+        {% else %}
+        Not set
+        {% endif %}
+    </p>
 
     <p><strong>Deadline:</strong>
         {% if todo.deadline %}
